@@ -15,7 +15,7 @@ for i in locData:
     lonArr = np.append(lonArr, lon)
     elevArr = np.append(elevArr, elev)
 
-
+startTime = "9:00"
 # data = [go.Scatter3d(x=lonArr, y=latArr, z=elevArr, mode='markers', marker=dict(size=1, color=255))]
 # fig = go.Figure(data=data)
 # fig.show()
