@@ -16,25 +16,6 @@ for i in locData:
     elevArr = np.append(elevArr, elev)
 
 
-def calculateWind(direction):
-    direction = direction.split(',')
-
-
-def windTypeCalc(latArr, lonArr):  # windperH):
-    directions = []
-    # tantheta = (y/x)
-    for i in range(len(latArr)):
-        if i < len(latArr) - 1:
-            diffLat = latArr[i] - latArr[i + 1]
-            diffLon = lonArr[i] - lonArr[i + 1]
-            print(diffLat, diffLon, i)
-            directions.append(degrees(atan(diffLat / diffLon)))
-    return directions
-
-
-directions = windTypeCalc(latArr, lonArr)
-directions
-
-data = [go.Scatter3d(x=lonArr, y=latArr, z=elevArr, mode='markers', marker=dict(size=1, color=255))]
-fig = go.Figure(data=data)
-fig.show()
+# data = [go.Scatter3d(x=lonArr, y=latArr, z=elevArr, mode='markers', marker=dict(size=1, color=255))]
+# fig = go.Figure(data=data)
+# fig.show()
