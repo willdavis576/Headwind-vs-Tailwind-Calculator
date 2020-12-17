@@ -1,25 +1,24 @@
-import requests
-import json
-import apiKey
-
-response = requests.get("http://api.weatherapi.com/v1/forecast.json?key={api_key}&q={lat},{lon}".format(api_key=apiKey.apiKey, lat=apiKey.lat, lon=apiKey.lon))
-
-data = json.loads(response.text)
-
-startTime = "9:00"
-startTime = int(startTime[0])
-wind = []
-windData = data["forecast"]["forecastday"][0]["hour"]
-wind.append((windData[startTime]['wind_mph'], windData[startTime]['wind_degree']))
-
-routeLength = int("50")
-predictedSpeed = int("13")
-
-predictedTime = routeLength / predictedSpeed
-
-predictedTimeR = round(predictedTime)
 
 
-for i in range(predictedTimeR):
-    time = i + 1 + startTime
-    wind.append((windData[time]['wind_mph'], windData[time]['wind_degree']))
+def getWind(coords, startTime, routeLength, predictedSpeed):
+    import requests
+    import json
+    import apiKey
+
+    data = []
+    for i in range(4):
+        response = requests.get(
+            "http://api.weatherapi.com/v1/forecast.json?key={api_key}&q={lat},{lon}".format(api_key=apiKey.apiKey, lat=coords[i](0), lon=coords[i](1)))
+        data.append(json.loads(response.text))
+
+        startTime = int(startTime[0])
+        predictedTime = routeLength / predictedSpeed
+        predictedTimeR = round(predictedTime)
+
+        wind = []
+        for i in range(predictedTimeR):
+            time = i + startTime
+            windData = data[i]["forecast"]["forecastday"][0]["hour"]
+            wind.append((windData[time]['wind_mph'], windData[time]['wind_degree']))
+
+    return wind
