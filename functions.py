@@ -27,3 +27,20 @@ def Convert(file):
             next = True
     f.close()
     return data
+
+
+def getMaxCoords():
+    import numpy as np
+    maxLat = (np.where(latArr == np.amax(latArr)), np.amax(latArr))
+    topCoord = (maxLat[1], lonArr[maxLat[0][0][0]])
+
+    minLat = (np.where(latArr == np.amin(latArr)), np.amin(latArr))
+    bottomCoord = (minLat[1], lonArr[minLat[0][0][0]])
+
+    minLon = (np.where(lonArr == np.amin(lonArr)), np.amin(lonArr))
+    leftCoord = (latArr[minLon[0][0][0]], minLon[1])
+
+    maxLon = (np.where(lonArr == np.amax(lonArr)), np.amax(lonArr))
+    rightCoord = (latArr[maxLon[0][0][0]], maxLon[1])
+
+    return topCoord, bottomCoord, leftCoord, rightCoord
